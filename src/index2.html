@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+<head>
+<title>canvas粒子效果栗子二</title>
+<meta charset="utf-8">
+<link rel="dns-prefetch" href="http://res.nie.netease.com">
+<!--[if lt IE 9]>
+<script src="http://res.nie.netease.com/comm/html5/html5shiv.js"></script>
+<![endif]-->
+<style type="text/css">
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    background: #000;
+}
+</style>
+</head>
+<body>
+
+    <canvas class="snow-canvas" id="Jcanvas">
+        <img src="img/snow.png" class="hide">
+    </canvas>
+
+
+<script charset="utf-8" src="http://res.nie.netease.com/comm/js/jquery(mixNIE).1.11.js"></script>
+<script charset="utf-8" type="text/javascript" src="js/ParticleEffect.js"></script>
+<script type="text/javascript">
+nie.define("Index",function(){
+    $('#Jcanvas')[0].width = 1900;
+    $('#Jcanvas')[0].height = 1000;
+    ParticleEffect.create('#Jcanvas',{
+        startPoint: '1900,-100', //【选填】起点坐标，默认是画布的中心
+        direction: '-1, 1' ,//【选填】x，y方向，用正负1来代表方向(默认为(0,0)随机方向)
+        speed: '10' , //【选填】粒子速度（默认为2）
+        size: '25', //【选填】粒子大小(默认为2)
+        count: '5' //【选填】粒子数量级，默认为5（0-10）
+    });
+
+    var _showFps = function(){//显示页面的fps状态
+        var params = function(u, p){//获取url参数
+                var m=new RegExp("(?:&|/?)"+p+"=([^&$]+)").exec(u);
+                return m?m[1]:'';
+            },
+            fps = params(location.search,'fps');
+        if(!fps || fps != 1){return;}
+        var script = document.createElement('script');
+        script.onload = function(){
+            var stats = new Stats();
+            stats.domElement.style.cssText='position:fixed;left:0;top:0;z-index:10000';
+            document.body.appendChild(stats.domElement);
+            requestAnimationFrame(
+                function loop(){
+                    stats.update();
+                    requestAnimationFrame(loop)
+                });
+        };
+        script.src='http://rawgit.com/mrdoob/stats.js/master/build/stats.min.js';
+        document.head.appendChild(script);
+    };
+    _showFps();
+});
+</script>
+
+</body>
+</html>
