@@ -58,7 +58,6 @@ var ParticleEffect = function() {
         _startPointX,
         _startPointY,
 		_image,
-    _down = 'http://adl.netease.com/d/g/lxf/c/gw',
 		_imageEle;
 
     this.options = $.extend({
