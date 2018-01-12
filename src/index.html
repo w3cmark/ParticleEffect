@@ -21,35 +21,33 @@ body{
 <script type="text/javascript" src="http://www.w3cmark.com/mark/jquery-2.1.1.min.js"></script>
 <script charset="utf-8" type="text/javascript" src="js/ParticleEffect.js"></script>
 <script type="text/javascript">
-nie.define("Index",function(){
-    $('#Jcanvas')[0].width = 1900;
-    $('#Jcanvas')[0].height = 1000;
+$('#Jcanvas')[0].width = 1900;
+$('#Jcanvas')[0].height = 1000;
 
-    ParticleEffect.create('#Jcanvas');
+ParticleEffect.create('#Jcanvas');
 
-    var _showFps = function(){//显示页面的fps状态
-        var params = function(u, p){//获取url参数
-                var m=new RegExp("(?:&|/?)"+p+"=([^&$]+)").exec(u);
-                return m?m[1]:'';
-            },
-            fps = params(location.search,'fps');
-        if(!fps || fps != 1){return;}
-        var script = document.createElement('script');
-        script.onload = function(){
-            var stats = new Stats();
-            stats.domElement.style.cssText='position:fixed;left:0;top:0;z-index:10000';
-            document.body.appendChild(stats.domElement);
-            requestAnimationFrame(
-                function loop(){
-                    stats.update();
-                    requestAnimationFrame(loop)
-                });
-        };
-        script.src='http://rawgit.com/mrdoob/stats.js/master/build/stats.min.js';
-        document.head.appendChild(script);
+var _showFps = function(){//显示页面的fps状态
+    var params = function(u, p){//获取url参数
+            var m=new RegExp("(?:&|/?)"+p+"=([^&$]+)").exec(u);
+            return m?m[1]:'';
+        },
+        fps = params(location.search,'fps');
+    if(!fps || fps != 1){return;}
+    var script = document.createElement('script');
+    script.onload = function(){
+        var stats = new Stats();
+        stats.domElement.style.cssText='position:fixed;left:0;top:0;z-index:10000';
+        document.body.appendChild(stats.domElement);
+        requestAnimationFrame(
+            function loop(){
+                stats.update();
+                requestAnimationFrame(loop)
+            });
     };
-    _showFps();
-});
+    script.src='http://rawgit.com/mrdoob/stats.js/master/build/stats.min.js';
+    document.head.appendChild(script);
+};
+_showFps();
 </script>
 
 </body>
